@@ -1,8 +1,3 @@
-/*
-  Colors: http://getuicolors.com
-*/
-
-/* Setup */
 :root {
   --black: #000000;
   --almost-black: #263238;
@@ -33,7 +28,6 @@ body {
   background: var(--grey-light);
 }
 
-/* Typography */
 .center {
   text-align: center;
 }
@@ -175,4 +169,19 @@ label {
 input[type=submit] {
   margin: 34px auto 24px;
   display: block;
+}
+
+.link-options {
+  text-align: center;
+  margin-top: 15px; /* Adjust the space between the login button and the links */
+}
+
+.link {
+  color: #007bff; /* Use your theme's hyperlink color */
+  text-decoration: none; /* Optionally remove the underline */
+  margin: 0 5px; /* Adjust spacing around the links */
+}
+
+.link:hover {
+  text-decoration: underline; /* Adds underline on hover for better user experience */
 }
