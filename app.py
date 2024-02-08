@@ -2,7 +2,8 @@ from functools import wraps
 from flask import Flask, redirect, render_template, session
 import pymongo
 from dotenv import load_dotenv
-import os 
+import os
+
 
 app = Flask(__name__)  
 app.secret_key = "secret"
@@ -24,6 +25,7 @@ def login_required(func):
             return redirect('/')
         
     return wrap
+
 #routes 
 from user import routes
 
@@ -38,4 +40,12 @@ def goSignup():
 @app.route('/dashboard/')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')    
+    return render_template('dashboard.html')
+
+@app.route('/forgetpassword/')
+def goSignup():
+    return render_template('forgetpassword.html')
+
+@app.route('/resetpassword/')
+def goSignup():
+    return render_template('resetpassword.html')
