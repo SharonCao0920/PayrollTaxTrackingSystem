@@ -25,7 +25,11 @@ body {
   font-size: 18px;
   line-height: 28px;
   color: var(--black);
-  background: var(--grey-light);
+  background: #cccccc;
+  padding: 0;
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack flex items vertically */
+  height: 100%; /* Full height of the viewport */
 }
 
 .center {
@@ -34,9 +38,9 @@ body {
 
 h1 {
   margin: 0.5em 0 1em;
-  font-size: 26px;
+  font-size: 45px;
   line-height: 1.2;
-  color: var(--almost-black);
+  color: white;
 }
 
 h2 {
@@ -184,4 +188,107 @@ input[type=submit] {
 
 .link:hover {
   text-decoration: underline; /* Adds underline on hover for better user experience */
+}
+
+/* Header and Footer */
+/* styles.css */
+/* Header and Footer */
+/* styles.css */
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+}
+
+.header-image {
+  max-width: 100%;
+  position: relative;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.header-image img {
+  width: 100%;   /* Makes the image responsive */
+  max-height: 500px;
+  height: 50%;  /* Maintains the aspect ratio */
+  display: block; /* Removes any default inline spacing */
+
+}
+
+
+.centered-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* Title color */
+  text-align: center; /* Center the title */
+  z-index: 2; /* Make sure the title is above the image */
+}
+
+.header-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Style for the navigation bar as a whole */
+.navbar {
+  text-align: center;
+  background: #333; /* Color of the navbar */
+  padding: 0; /* Reset padding */
+  margin: 0; /* Reset margin */
+}
+
+/* Style for the ul element containing the tabs, set to flex container */
+.nav-tabs {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Use flexbox layout */
+  justify-content: space-around; /* Distribute space around the tabs */
+  background: #444; /* Background color for the entire tab bar */
+  width: 100%; /* Ensure the navbar takes full width */
+}
+
+/* Style for each tab, flex item */
+.nav-tabs .tab {
+  flex-grow: 1; /* Each tab will grow to take up equal space */
+  text-align: center; /* Center the text inside each tab */
+  border-right: 1px solid #555; /* Add right border to each tab */
+}
+
+/* Remove right border for the last tab */
+.nav-tabs .tab:last-child {
+  border-right: none;
+}
+
+/* Style for the anchor tags within each tab */
+.nav-tabs .tab a {
+  display: block;
+  padding: 10px 20px; /* Tab padding */
+  background: transparent; /* Tab background color - transparent to allow the nav-tabs background to show */
+  color: white; /* Tab text color */
+  text-decoration: none; /* Remove underline from links */
+  border-bottom: none; /* Remove bottom border */
+}
+
+/* Style for hover, active, and focus states */
+.nav-tabs .tab a:hover,
+.nav-tabs .tab a:active,
+.nav-tabs .tab a:focus {
+  background: #555; /* Background color for hover/active state */
+  color: #ddd; /* Text color for hover/active state */
+}
+
+main {
+  flex: 1; /* This will make the main content expand to fill available space */
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%; /* Full width */
 }

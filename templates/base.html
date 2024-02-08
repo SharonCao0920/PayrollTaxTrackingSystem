@@ -12,9 +12,13 @@
 </head>
 <body>
 
-  {% block content %}
-    {# Template inserted here #}
-  {% endblock %}
+  {% include 'components/header.html' %}
+  <main>
+    {% block content %}
+      {# Template inserted here #}
+    {% endblock %}
+  </main>
+  {% include 'components/footer.html' %}
   
   <script src="/static/js/jquery.js"></script>
   <script src="/static/js/scripts.js"></script>

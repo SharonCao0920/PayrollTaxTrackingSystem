@@ -13,3 +13,11 @@ def signout():
 @app.route('/user/login/', methods=['POST'])
 def login():
     return User().login()
+
+@app.route('/user/forgetPass/', methods=['POST'])
+def forgetPass():
+    return User().forgetPass()
+
+@app.route('/user/resetPass/', methods=['POST'])
+def resetPass():
+    return User().resetPass()

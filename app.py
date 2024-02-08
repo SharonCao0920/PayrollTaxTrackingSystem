@@ -29,7 +29,28 @@ from user import routes
 
 @app.route('/')
 def home():
-    return render_template('login.html')    
+    return render_template('login.html')   
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')   
+
+@app.route('/services')
+def services():
+    return render_template('service.html') 
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html') 
+
+@app.route('/homepage')
+def homepage():
+    return render_template('home.html') 
+
+# @app.route('/gologin')
+# def gologin():
+#     return render_template('login.html')  
 
 @app.route('/gosignup/')
 def goSignup():
@@ -38,4 +59,12 @@ def goSignup():
 @app.route('/dashboard/')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')    
+    return render_template('dashboard.html')   
+
+@app.route('/goforgetPass/')
+def goforgetPass():
+    return render_template('forgetpassword.html') 
+
+@app.route('/goresetPass/')
+def goresetPass():
+    return render_template('resetpassword.html') 
