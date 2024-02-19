@@ -22,3 +22,7 @@ def forget_password():
 @app.route('/user/resetpassword', methods=['POST'])
 def reset_password():
     return User().reset_password()
+
+@app.route('/user/comparePdf/', methods=['POST'])
+def comparePdf():
+    return User().comparePdf()
