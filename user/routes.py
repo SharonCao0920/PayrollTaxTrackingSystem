@@ -27,7 +27,6 @@ def forgetPass():
 def resetPass():
     return User().resetPass()
 
-
 @app.route('/user/comparePdf/', methods=['POST'])
 def comparePdf():
     return User().comparePdf()

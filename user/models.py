@@ -82,6 +82,7 @@ class User:
 
         return jsonify({"error": "Reset password failed"}), 400
 
+
     def comparePdf(self):
         client_id = "c7c24845-f54f-45c1-aead-d0e876e5c217"
         client_secret = "6e8433eaf16891494e63d1bb95740431"
@@ -96,8 +97,8 @@ class User:
         # upload sample files
         for filename in glob.iglob("C:\\Files\\*.pdf", recursive=True):
             destFile = filename.replace("C:\\Files\\", "", 1)
-            file_api.upload_file(groupdocs_comparison_cloud.UploadFileRequest(destFile, filename))
-            print("Uploaded file: " + destFile)
+        file_api.upload_file(groupdocs_comparison_cloud.UploadFileRequest(destFile, filename))
+        print("Uploaded file: " + destFile)
         # This code example demonstrates how to compare two PDF files.
         # Create an instance of the API
         api_instance = groupdocs_comparison_cloud.CompareApi.from_keys(client_id, client_secret)
