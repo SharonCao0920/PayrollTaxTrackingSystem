@@ -1,22 +1,46 @@
-import os
+from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from functools import wraps
-
+import random
+import smtplib
+from flask import Flask, jsonify, redirect, render_template, request, session
 import pymongo
 from dotenv import load_dotenv
-from flask import Flask, redirect, render_template, session
+import os
 
-app = Flask(__name__)
+from werkzeug import Client
+
+
+
+
+app = Flask(__name__)  
 app.secret_key = "secret"
 
+#test
 load_dotenv()
 URI = os.getenv("DATABASE_URI")
+#client = pymongo.MongoClient(URI)
+#db = Client.get_database("user_login_system")
 
-# database
+
+#database
 client = pymongo.MongoClient(URI)
 db = client.user_login_system
 
+otp_collection = db.otp_collection
 
-# decorators
+
+
+# mail transporter setup... replace setup with project mail setup
+smtp_host = 'smtp.mail.yahoo.com'
+smtp_port = 465
+smtp_user = 'ennydiamond@yahoo.com'
+smtp_pass = 'cuojgnjurjsllgal'
+
+
+
+#decorators
 def login_required(func):
     @wraps(func)
     def wrap(*args, **kwargs):
@@ -24,36 +48,31 @@ def login_required(func):
             return func(*args, **kwargs)
         else:
             return redirect('/')
-
+        
     return wrap
-
-
-# routes
+#routes 
+from user import routes
 
 @app.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('login.html')   
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
-
+    return render_template('about.html')   
 
 @app.route('/services')
 def services():
-    return render_template('service.html')
-
+    return render_template('service.html') 
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
-
+    return render_template('contact.html') 
 
 @app.route('/homepage')
 def homepage():
-    return render_template('home.html')
-
+    return render_template('home.html') 
 
 # @app.route('/gologin')
 # def gologin():
@@ -61,20 +80,86 @@ def homepage():
 
 @app.route('/gosignup/')
 def goSignup():
-    return render_template('signup.html')
-
+    return render_template('signup.html')   
 
 @app.route('/dashboard/')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
-
+    return render_template('dashboard.html')   
 
 @app.route('/goforgetPass/')
 def goforgetPass():
-    return render_template('forgetpassword.html')
+    return render_template('forgetpassword.html') 
 
 
 @app.route('/goresetPass/')
 def goresetPass():
     return render_template('resetpassword.html')
+
+@app.route('/generate/')
+def generate():
+    return render_template('generateOTP.html')
+
+
+# Generate OTP
+def generate_otp():
+    return str(random.randint(100000, 999999))
+
+
+# Send OTP via email
+def send_otp_by_email(email, otp):
+    msg = MIMEMultipart()
+    msg['From'] = 'ennydiamond@yahoo.com' #replace mail with project mail 
+    msg['To'] = email
+    msg['Subject'] = 'OTP for Verification'
+    body = f'Your OTP is: {otp}'
+    msg.attach(MIMEText(body, 'plain'))
+
+    with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
+        server.login(smtp_user, smtp_pass)
+        server.sendmail(smtp_user, email, msg.as_string())
+    print('OTP sent to', email)
+
+
+# Verify OTP
+def verify_otp(otp):
+    otp_data = otp_collection.find_one({"otp": otp})
+    if not otp_data:
+        return "not found"
+
+    timestamp = otp_data["timestamp"]
+    current_time = datetime.now()
+    difference_in_minutes = (current_time - timestamp).total_seconds() / 60
+
+    if difference_in_minutes > 5:
+        return "expired"
+
+    return "ok"
+
+
+# API endpoint to generate and send OTP
+@app.route('/generate-otp', methods=['POST'])
+def generate_otp_endpoint():
+    data = request.json
+    email = data.get('email')
+    otp = generate_otp()
+
+    otp_collection.insert_one({"email": email, "otp": otp, "timestamp": datetime.now()})
+    send_otp_by_email(email, otp)
+
+    return jsonify({"success": True})
+
+
+# Verify OTP Endpoint
+@app.route('/verify-otp', methods=['POST'])
+def verify_otp_endpoint():
+    data = request.json
+    otp = data.get('otp')
+    verification_result = verify_otp(otp)
+
+    return jsonify({"status": verification_result})
+       
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
