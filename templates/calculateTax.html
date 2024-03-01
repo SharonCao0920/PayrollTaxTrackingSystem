@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div>
+        <form id="taxForm" method="POST" action="/calculatetax">
+            <label for="gross_income">Gross Income:</label>
+            <input type="number" id="gross_income" name="gross_income" required>
+            <label for="filing_status">Filing Status:</label>
+            <select id="filing_status" name="filing_status" required>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+            </select>
+            <label for="deposit_schedule">Deposit Schedule:</label>
+            <select id="deposit_schedule" name="deposit_schedule" required>
+                <option value="monthly">Monthly</option>
+                <option value="semiweekly">Semiweekly</option>
+            </select>
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        <h2>Federal Taxes</h2>
+        <p>Federal Tax: ${{ federal_taxes.federal_tax }}</p>
+        <p>FUTA Tax: ${{ federal_taxes.futa_tax }}</p>
+        <p>SSA Tax: ${{ federal_taxes.ssa_tax }}</p>
+
+        <h2>California State Taxes</h2>
+        <p>State Tax: ${{ ca_taxes.ca_state_tax }}</p>
+        <p>SDI Tax: ${{ ca_taxes.ca_sdi_tax }}</p>
+
+        <h3>Total Taxes: ${{ total_taxes }}</h3>
+        <a href="/">Calculate again</a>
+    </div>
+{% endblock %}
