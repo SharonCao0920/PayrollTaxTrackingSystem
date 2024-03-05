@@ -40,17 +40,17 @@ def about():
 def services():
     return render_template('service.html') 
 
+@app.route('/payrollcalculator')
+def payrollcalculator():
+    return render_template('payrollcalculator.html') 
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html') 
 
 @app.route('/homepage')
 def homepage():
-    return render_template('home.html') 
-
-# @app.route('/gologin')
-# def gologin():
-#     return render_template('login.html')  
+    return render_template('home.html')   
 
 @app.route('/gosignup/')
 def goSignup():
