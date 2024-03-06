@@ -185,3 +185,17 @@ input[type=submit] {
 .link:hover {
   text-decoration: underline; /* Adds underline on hover for better user experience */
 }
+
+#upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pdf-input {
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+}
