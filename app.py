@@ -97,10 +97,10 @@ def goresetPass():
 @app.route('/auth_google/')
 def auth_google():
     google = oauth.create_client('google')
-    redirect_uri = url_for('auth_google', _external=True)  # Redirect to this route for authorization
+    redirect_uri = url_for('auth_google_authorized', _external=True)  # Redirect to this route for authorization
     return google.authorize_redirect(redirect_uri)
 
-@app.route('/auth_google/authorized')
+@app.route('/auth_google_authorized/')
 def auth_google_authorized():
     google = oauth.create_client('google')  # Create the Google OAuth client
     token = google.authorize_access_token()  # Access token from Google (needed to get user info)
@@ -110,4 +110,5 @@ def auth_google_authorized():
     # and set your own data in the session, not the profile from Google
     session['profile'] = user_info
     session.permanent = True  # Make the session permanent so it keeps existing after the browser gets closed
-    return redirect('/')
+    # return redirect('/dashboard/')
+    return redirect('/')
