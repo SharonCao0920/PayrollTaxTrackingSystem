@@ -292,3 +292,48 @@ footer {
   padding: 10px 0;
   width: 100%; /* Full width */
 }
+
+.form-row {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.form-row label,
+.form-row input,
+.form-row select {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.form-row label {
+  width: 150px; /* Adjust as needed */
+}
+
+.form-row button {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 10px;
+  color: green;
+}
+
+.tax-info {
+  text-align: justify;
+}
+
+.tax-info p {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tax-info p span {
+  text-align: right;
+}
+
+.right-align {
+  text-align: justify;
+  color: blue;
+}
+
+
+

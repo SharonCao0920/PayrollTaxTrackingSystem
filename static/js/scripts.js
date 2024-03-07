@@ -96,7 +96,7 @@ document.getElementById('otpForm').addEventListener('submit', async function(eve
 
   const email = document.getElementById('email').value.trim();
 
-  const url =  '/generate-otp'
+  const url =  '/generateOTP/generate-otp'
 
   // Data to send
   const data = {
@@ -143,7 +143,7 @@ document.getElementById('otpVerifyForm').addEventListener('submit', async functi
   const otp = document.getElementById('otp').value.trim();
 
   // URL endpoint for OTP verification
-  const url = '/verify-otp';
+  const url = '/generateOTP/verify-otp';
 
   // Data to send
   const data = {
