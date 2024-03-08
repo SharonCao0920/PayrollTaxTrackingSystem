@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #chat-container { width: 60%; margin: auto; max-width: 600px; }
+        #message-input { width: 100%; box-sizing: border-box; padding: 10px; }
+        #submit-btn { padding: 10px 20px; }
+        .message { padding: 10px; margin: 5px; border-radius: 5px; background-color: #f0f0f0; }
+        .user { text-align: right; }
+        .bot { text-align: left; }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h2>Chat with Our AI Payroll Tax Expert!</h2>
+        <div id="chat-box"></div>
+        <input type="text" id="message-input" placeholder="Type your message here...">
+        <button id="submit-btn">Send</button>
+    </div>
+
+    <script>
+        document.getElementById('submit-btn').onclick = function() {
+            const messageInput = document.getElementById('message-input');
+            const userMessage = messageInput.value.trim();
+            if(userMessage) {
+                addMessage('user', userMessage);
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({message: userMessage}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    addMessage('bot', data.response);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+            messageInput.value = ''; // Clear input box after sending message
+        };
+
+        function addMessage(sender, message) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>

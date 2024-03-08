@@ -10,7 +10,7 @@ $("form[name=signup_form").submit(function(e) {
     data: data,
     dataType: "json",
     success: function(resp) {
-      window.location.href = "/";
+      window.location.href = "/gologin/";
     },
     error: function(resp) {
       $error.text(resp.responseJSON.error).removeClass("error--hidden");
@@ -54,7 +54,7 @@ $("form[name=forgetpassword_form").submit(function(e) {
     data: data,
     dataType: "json",
     success: function(resp) {
-      window.location.href = "/goresetPass/";
+      window.location.href = "/generate/";
     },
     error: function(resp) {
       $error.text(resp.responseJSON.error).removeClass("error--hidden");
@@ -76,7 +76,7 @@ $("form[name=reset_password_form").submit(function(e) {
     data: data,
     dataType: "json",
     success: function(resp) {
-        window.location.href = "/";
+        window.location.href = "/gologin/";
     },
     error: function(resp) {
       $error.text(resp.responseJSON.error).removeClass("error--hidden");
@@ -85,6 +85,97 @@ $("form[name=reset_password_form").submit(function(e) {
 
   e.preventDefault();
 });
+
+$(document).ready(function() {
+  let monitorUrl = null;
+  $('#urlForm').submit(function(e) {
+      e.preventDefault();
+      monitorUrl = $('#url').val();
+      $('#messages').append('<p>Monitoring ' + monitorUrl + '</p>');
+      // Start monitoring
+      setInterval(function() {
+          if (monitorUrl) {
+              $.ajax({
+                  url: '/check_updates',
+                  type: 'POST',
+                  contentType: 'application/json',
+                  dataType: 'json',
+                  data: JSON.stringify({ "url": monitorUrl }),
+                  success: function(response) {
+                      $('#messages').append('<p>' + response.message + '</p>');
+                      if (response.changes) {
+                          $('#changes').html('<pre>' + response.changes + '</pre>');
+                      }
+                  },
+                  error: function(xhr, status, error) {
+                      $('#messages').append('<p>Error: ' + error + '</p>');
+                  }
+              });
+          }
+      }, 10000); // 10 seconds
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  function fetchData() {
+      fetch("/update")
+          .then(response => response.json())
+          .then(data => {
+              document.getElementById('status').textContent = data.message;
+              document.getElementById('updates').textContent = data.update || "No updates detected.";
+          })
+          .catch(error => console.error('Error fetching updates:', error));
+  }
+
+  setInterval(fetchData, 10000); // Fetch updates every 10 seconds
+  fetchData(); // Initial fetch
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var servicesTab = document.getElementById('services-tab');
+  var servicesDropdown = servicesTab.querySelector('.services-dropdown');
+
+  // Function to check if an element is a descendant of another element
+  function isDescendant(parent, child) {
+      var node = child.parentNode;
+      while (node != null) {
+          if (node == parent) {
+              return true;
+          }
+          node = node.parentNode;
+      }
+      return false;
+  }
+
+  // Show services dropdown when mouse enters services tab or its dropdown
+  servicesTab.addEventListener('mouseenter', function(event) {
+      servicesDropdown.classList.add('show');
+  });
+
+  // Keep showing services dropdown when mouse moves over services tab or its dropdown
+  servicesTab.addEventListener('mousemove', function(event) {
+      if (!isDescendant(servicesTab, event.target) && !isDescendant(servicesDropdown, event.target)) {
+          servicesDropdown.classList.remove('show');
+      }
+  });
+
+  // Hide services dropdown when mouse leaves services tab or its dropdown
+  servicesTab.addEventListener('mouseleave', function(event) {
+      if (!isDescendant(servicesTab, event.relatedTarget) && !isDescendant(servicesDropdown, event.relatedTarget)) {
+          servicesDropdown.classList.remove('show');
+      }
+  });
+
+  // Keep showing services dropdown when mouse moves over dropdown
+  servicesDropdown.addEventListener('mousemove', function(event) {
+      if (!isDescendant(servicesDropdown, event.target)) {
+          servicesDropdown.classList.remove('show');
+      }
+  });
+});
+
+/* Francis: OTP */
 
 
 // OTP Generation and varification script starts here 
@@ -96,7 +187,7 @@ document.getElementById('otpForm').addEventListener('submit', async function(eve
 
   const email = document.getElementById('email').value.trim();
 
-  const url =  '/generate-otp'
+  const url =  '/generateOTP/generate-otp'
 
   // Data to send
   const data = {
@@ -143,7 +234,7 @@ document.getElementById('otpVerifyForm').addEventListener('submit', async functi
   const otp = document.getElementById('otp').value.trim();
 
   // URL endpoint for OTP verification
-  const url = '/verify-otp';
+  const url = '/generateOTP/verify-otp';
 
   // Data to send
   const data = {

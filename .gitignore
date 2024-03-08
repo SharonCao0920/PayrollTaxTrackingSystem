@@ -2,3 +2,5 @@
 __pycache__
 user/__pycache__
 .venv
+chatbot/__pycache__
+chatbot/venv

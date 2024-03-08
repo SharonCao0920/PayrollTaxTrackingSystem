@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'components/tabs.html' %}
+
+
+
+<form id="upload-form" enctype="multipart/form-data">
+    <h1>PDF Comparison</h1>
+    <label for="source-pdf" class="pdf-input">Choose source PDF file:</label>
+    <input type="file" id="source-pdf" name="sourcePdf" accept=".pdf" required>
+
+    <label for="target-pdf" class="pdf-input">Choose target PDF file:</label>
+    <input type="file" id="target-pdf" name="targetPdf" accept=".pdf" required>
+
+    <input type="submit" value="Upload">
+</form>
+
+<div class="link-options">
+    <a href="/" class="link">Back to Dashboard</a>
+</div>
+
+{% endblock %}
