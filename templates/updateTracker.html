@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% include 'components/tabs.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    URL Monitor
+                </div>
+                <div class="card-body">
+                    <form id="urlForm">
+                        <div class="form-group">
+                            <label for="url">URL to monitor:</label>
+                            <input type="text" id="url" name="url" class="form-control" required>   
+                        </div>
+                        <button type="submit" class="btn btn-primary">Start Monitoring</button>
+                    </form>
+                    <div id="messages"></div>   
+                    <div id="changes"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,3 +2,8 @@ flask
 pymongo
 python-dotenv
 passlib
+groupdocs-comparison-cloud
+authlib
+requests
+beautifulsoup4
+lxml

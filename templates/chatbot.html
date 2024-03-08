@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% include 'components/tabs.html' %}
+
+    <div id="main-container">
+        <img src="{{ url_for('static', filename='images/SFBU.png') }}" alt="SFBU Logo" />
+        <h1>Welcome to SFBU</h1>
+        <input type="text" id="question" placeholder="Type your question..." autocomplete="off">
+        <button id="ask-button">Ask</button>
+        <button id="clear-history">Clear History</button>
+        <div id="chat-history">
+            <!-- Chat history will be loaded here by JavaScript -->
+        </div>
+    </div>
+    
+{% endblock %}

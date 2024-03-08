@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'components/tabs.html' %}
+    <div>
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="center">
+                    <h2>Federal Taxes</h2>
+                    <div class="tax-info">
+                        <p>Federal Tax: <span class="right-align">${{ federal_taxes.federal_tax }}</span></p>
+                        <p>FUTA Tax: <span class="right-align">${{ federal_taxes.futa_tax }}</span></p>
+                        <p>SSA Tax: <span class="right-align">${{ federal_taxes.ssa_tax }}</span></p>
+                    </div>
+                </div> 
+            </div>
+            
+            <div class="card">
+                <div class="center">
+                    <h2>California State Taxes</h2>
+                    <div class="tax-info">
+                        <p>State Tax: <span class="right-align">${{ ca_taxes.ca_state_tax }}</span></p>
+                        <p>SDI Tax: <span class="right-align">${{ ca_taxes.ca_sdi_tax }}</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center">
+                <h3>Total Taxes: <span class="right-align">${{ total_taxes }}</span></h3>
+                <a href="/calculate">Calculate again</a>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

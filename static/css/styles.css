@@ -186,6 +186,22 @@ input[type=submit] {
   margin: 0 5px; /* Adjust spacing around the links */
 }
 
+/* Jade compare pdf 3/6/2024 */
+#upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pdf-input {
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+}
+/* end */
+
 .link:hover {
   text-decoration: underline; /* Adds underline on hover for better user experience */
 }
@@ -231,13 +247,14 @@ header {
   font-size: 24px;
   margin: 0;
 }
-
 /* Style for the navigation bar as a whole */
 .navbar {
   text-align: center;
   background: #333; /* Color of the navbar */
   padding: 0; /* Reset padding */
   margin: 0; /* Reset margin */
+  position: relative; /* Add relative positioning */
+  z-index: 1; /* Ensure navbar stays above other content */
 }
 
 /* Style for the ul element containing the tabs, set to flex container */
@@ -281,6 +298,48 @@ header {
   color: #ddd; /* Text color for hover/active state */
 }
 
+.services-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  padding: 10px;
+  z-index: 2; /* Set a high z-index */
+}
+
+.services-dropdown li {
+  padding: 5px 0;
+}
+
+.services-dropdown li a {
+  color: white;
+}
+
+.services-dropdown.show {
+  display: block;
+}
+
+.google-signin-button {
+  margin-top: 20px;
+}
+
+.btn-google {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #555;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.btn-google img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 main {
   flex: 1; /* This will make the main content expand to fill available space */
 }
@@ -291,4 +350,22 @@ footer {
   text-align: center;
   padding: 10px 0;
   width: 100%; /* Full width */
+}
+
+.container {
+    display: flex; /* Use flexbox to center children */
+    justify-content: center; /* Center flex children on the main axis */
+    align-items: center; /* Center flex children on the cross axis */
+    height: 100vh; /* Full height of the viewport */
+}
+
+.card {
+    width: 80%; /* Set the width of the card to 80% of its parent */
+    margin: auto; /* Center the card with automatic margins */
+    max-width: 500px; /* Optional: set a max-width for larger screens */
+}
+
+/* Ensure .row and .col-md-12 take full width of .container */
+.row, .col-md-12 {
+    width: 100%;
 }
